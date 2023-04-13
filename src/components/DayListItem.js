@@ -3,7 +3,7 @@ import "components/DayListItem.scss";
 import classNames from "classnames";
 
 export default function DayListItem(props) {
-  function organizeSpots() {
+  function formatSpots() {
     if (props.spots === 0) {
       return "no spots remaining";
     }
@@ -24,7 +24,7 @@ export default function DayListItem(props) {
       data-testid="day"
     >
       <h2 className="text--regular">{props.name}</h2>
-      <h3 className="text--light">{organizeSpots(props.spots)}</h3>
+      <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
   );
 }
