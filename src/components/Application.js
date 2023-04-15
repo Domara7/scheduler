@@ -3,6 +3,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import { useState } from "react";
 import "components/Appointment";
+import Appointment from "./Appointment";
 
 const days = [
   {
@@ -80,7 +81,11 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule"></section>
+      <section className="schedule">
+        {Object.values(appointments).map((appointment) => (
+          <Appointment key={appointment.id} {...appointment} />
+        ))}
+      </section>
     </main>
   );
 }
