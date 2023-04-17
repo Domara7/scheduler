@@ -65,11 +65,7 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
-        {Object.values(dailyAppointments).map((appointment) => (
-          <Appointment key={appointment.id} {...appointment} />
-        ))}
-      </section>
+      <section className="schedule">{appointments}</section>
     </main>
   );
 }
