@@ -23,14 +23,15 @@ export function getInterview(state, interview) {
 }
 
 export function getInterviewersForDay(state, day) {
-  const getDays = state.days.find((id) => id.name === day);
-  if (!getDays) {
-    return [];
-  }
-  const total = [];
-  for (let i of getDays.appointments) {
-    total.push(state.appointments[i]);
-  }
+  const { days, interviewers } = state;
+  const interviewerArr = [];
 
-  return total;
+  days.map((dayObj) => {
+    if (dayObj.name === day) {
+      dayObj.interviewers.forEach((interId) =>
+        interviewerArr.push(interviewers[interId])
+      );
+    }
+  });
+  return interviewerArr;
 }
