@@ -42,7 +42,8 @@
     "@testing-library/react-hooks": "^8.0.1",
     "babel-loader": "8.1.0",
     "react-test-renderer": "^16.9.0",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "react-error-overlay": "6.0.9"
   },
   "jest": {
     "watchPathIgnorePatterns": [
@@ -50,5 +51,8 @@
       "<rootDir>/.git/"
     ]
   },
-  "proxy": "http://localhost:8001"
+  "proxy": "http://localhost:8001",
+  "overrides": {
+    "react-error-overlay": "6.0.9"
+  }
 }

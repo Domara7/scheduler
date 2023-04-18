@@ -6,6 +6,7 @@ import "components/Appointment";
 import Appointment from "./Appointment";
 import { useEffect } from "react";
 import axios from "axios";
+import Status from "./Appointment/Status";
 import {
   getAppointmentsForDay,
   getInterview,
@@ -17,10 +18,36 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {},
+    appointments: {
+      1: {
+        id: 1,
+        time: "12pm",
+        interview: null,
+      },
+    },
+    interviewers: {},
   });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviews = getInterviewersForDay(state, state.day);
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState({
+      ...state,
+      appointments,
+    });
+
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, {
+      interview,
+    });
+  }
 
   useEffect(() => {
     const urlDays = `http://localhost:8001/api/days`;
@@ -50,6 +77,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={dailyInterviews}
+        bookInterview={(id, interview) => bookInterview(id, interview)}
       />
     );
   });
