@@ -6,7 +6,11 @@ import "components/Appointment";
 import Appointment from "./Appointment";
 import { useEffect } from "react";
 import axios from "axios";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 
 export default function Application(props) {
   const setDay = (day) => setState({ ...state, day });
@@ -16,6 +20,8 @@ export default function Application(props) {
     appointments: {},
   });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviews = getInterviewersForDay(state, state.day);
+
   useEffect(() => {
     const urlDays = `http://localhost:8001/api/days`;
     const urlAppointments = `http://localhost:8001/api/appointments`;
@@ -43,6 +49,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={dailyInterviews}
       />
     );
   });

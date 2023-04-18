@@ -4,8 +4,8 @@ export function getAppointmentsForDay(state, day) {
     return [];
   }
   const total = [];
-  for (let a of getDays.appointments) {
-    total.push(state.appointments[a]);
+  for (let i of getDays.appointments) {
+    total.push(state.appointments[i]);
   }
 
   return total;
@@ -20,4 +20,17 @@ export function getInterview(state, interview) {
     student: interview.student,
     interviewer: interviewData,
   };
+}
+
+export function getInterviewersForDay(state, day) {
+  const getDays = state.days.find((id) => id.name === day);
+  if (!getDays) {
+    return [];
+  }
+  const total = [];
+  for (let i of getDays.appointments) {
+    total.push(state.appointments[i]);
+  }
+
+  return total;
 }
