@@ -48,6 +48,43 @@ export default function Application(props) {
       interview,
     });
   }
+  function findDay(day) {
+    const days = {
+      Monday: 0,
+      Tuesday: 1,
+      Wednesday: 2,
+      Thursday: 3,
+      Friday: 4,
+    };
+    return days[day];
+  }
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    const interviewDay = findDay(state.day);
+    const day = {
+      ...state.days[interviewDay],
+      spots: state.days[interviewDay].spots + 1,
+    };
+
+    let days = state.days;
+    days[interviewDay] = day;
+
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((res) => {
+        setState({ ...state, appointments, days });
+        return res;
+      });
+  }
 
   useEffect(() => {
     const urlDays = `http://localhost:8001/api/days`;
@@ -78,6 +115,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={dailyInterviews}
         bookInterview={(id, interview) => bookInterview(id, interview)}
+        cancelInterview={cancelInterview}
       />
     );
   });
