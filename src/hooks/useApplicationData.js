@@ -30,9 +30,17 @@ export default function useApplicationData() {
       appointments,
     });
 
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, {
-      interview,
-    });
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, {
+        interview,
+      })
+      .then(() => {
+        setState({
+          ...state,
+          appointments,
+          days: updateSpots(state, appointments),
+        });
+      });
   }
   function findDay(day) {
     const days = {
@@ -88,5 +96,18 @@ export default function useApplicationData() {
       }));
     });
   }, []);
+  const updateSpots = function (state, appointments) {
+    return state.days.map((element) => {
+      if (element.name === state.day) {
+        return {
+          ...element,
+          spots: element.appointments
+            .map((appointment) => appointments[appointment])
+            .filter(({ interview }) => !interview).length,
+        };
+      }
+      return element;
+    });
+  };
   return { state, setDay, bookInterview, cancelInterview };
 }
