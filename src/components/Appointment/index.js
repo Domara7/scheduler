@@ -19,10 +19,10 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  // console.log("line 17", props);
 
   function save(name, interviewer) {
     const interview = {
@@ -30,10 +30,12 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW);
-    });
-    console.log("line 27 props", props);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => {
+        transition(ERROR_SAVE, true);
+      });
   }
 
   function deleteInterview(event) {
@@ -42,7 +44,7 @@ export default function Appointment(props) {
       props
         .cancelInterview(props.id)
         .then(() => transition(EMPTY))
-        .catch((error) => transition(ERROR_DELETE, true));
+        .catch(() => transition(ERROR_DELETE, true));
     } else {
       transition(CONFIRM);
     }
@@ -89,7 +91,7 @@ export default function Appointment(props) {
       )}
       {mode === ERROR_SAVE && (
         <Error
-          message="Could not save appointment."
+          message="Sorry could not save appointment."
           onClose={() => {
             back();
           }}
@@ -98,7 +100,7 @@ export default function Appointment(props) {
 
       {mode === ERROR_DELETE && (
         <Error
-          message="Could not cancel appointment."
+          message="Sorry could not cancel appointment."
           onClose={() => {
             back();
           }}
