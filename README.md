@@ -6,9 +6,9 @@ Scheduler is built using React and makes requests to an api server to get and sa
 
 ## Project Showcase
 
-!["Scheduler_Screenshot"]()
-!["Scheduler_Screenshot"]()
-!["Scheduler_Screenshot"]()
+!["Scheduler_Screenshot"](https://github.com/Domara7/scheduler/blob/master/Docs/photo3.png)
+!["Scheduler_Screenshot"](https://github.com/Domara7/scheduler/blob/master/Docs/photo1.png)
+!["Scheduler_Screenshot"](https://github.com/Domara7/scheduler/blob/master/Docs/photo2.png)
 
 ## Setup
 
