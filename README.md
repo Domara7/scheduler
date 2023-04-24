@@ -12,7 +12,13 @@ Scheduler is built using React and makes requests to an api server to get and sa
 
 ## Setup
 
-Install dependencies with `npm install`.
+- Fork and clone this repository
+- Install dependencies with npm install.
+- Fork and clone the [scheduler-api](https://github.com/lighthouse-labs/scheduler-api)
+- Follow steps in the [scheduler-api](https://github.com/lighthouse-labs/scheduler-api) README file in order to set up a proper database for the app
+- Open up 2 terminal windows, 1 for the scheduler webpack server and 1 for the scheduler-api
+- In both terminal windows just use "npm start" and you will be up and running!
+- If you would like to run tests for the scheduler app you can use the Jest framework "npm test"
 
 ## Running Webpack Development Server
 
@@ -31,3 +37,13 @@ npm test
 ```sh
 npm run storybook
 ```
+
+### Dependencies
+
+- axios
+- class-names
+- normalize.css
+- react
+- react-dom
+- react-scripts
+- react-hooks-testing-library
